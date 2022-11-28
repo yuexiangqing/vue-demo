@@ -4,14 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vue监测数据改变的原理</title>
+    <title>Vue.set的使用</title>
     <script src="../js/vue.js"></script>
 </head>
 <body>
   
     <div id="root">
+        <h1>学校信息</h1>
         <h2>学校名称：{{name}}</h2>
         <h2>学校地址：{{address}}</h2>
+        <h2>校长是：{{leader}}</h2>
+        <hr/>
+        <h1>学生信息</h1>
+        <button @click="addSex">添加性别属性，默认值为男</button>
+        <h2>姓名:{{student.name}}</h2>
+        <h2>年龄:真实{{student.age.rAge}},对外：{{student.age.sAge}}</h2>
+        <h2 v-if="student.sex">性别:{{student.sex}}</h2>
+
+        <h2>朋友们</h2>
+        <ul>
+            <li v-for="(f, index) in student.friends" :key="index">
+                {{f.name}} --- {{f.age}}
+            </li>
+        </ul>
+
     </div>
 
     <script>
@@ -23,15 +39,27 @@
                 address: '北京',
                 student:{
                     name: 'tom',
+                    // sex:'男',
                     age:{
                         rAge: 40,
                         sAge: 29
-                    },
+                    }, 
                     friends:[
-                        {name: 'jerry',age:35}
+                        {name: 'jerry',age:35},
+                        {name: 'tony',age:36},
                     ]
                 }
-            }
+            },
+            methods: {
+                addSex(){
+                    // 需要注意的是： 这里的方法只能给 data 里面的某个 *对象* 添加属性，但是不能直接给 data 添加属性
+                    // 在调用 set 的时候，第一个参数不允许是 vm，更不允许是 data
+
+                    // Vue.set(this.student, 'sex', '男')
+                    vm.$set(this.student, 'sex', '男')
+
+                }
+            },
         })
     </script>
 </body>
