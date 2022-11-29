@@ -10,8 +10,10 @@
 <body>
    
     <div id="root">
+        <h2 v-text="n"></h2>
         <h2>当前的n值是{{n}}</h2>
         <button @click="add">点我 n + 1</button>
+        <button @click="bye">点我销毁 vm </button>
     </div>
 
    
@@ -25,12 +27,22 @@
             },
             methods: {
                 add(){
+                    console.log('add')
                     this.n++
+                },
+                bye(){
+                    console.log('bye')
+                    this.$destroy()
+                }
+            },
+            watch:{
+                n(){
+                    console.log('n变了')
                 }
             },
             beforeCreate() {
                 console.log('beforeCreate')
-                },
+            },
             created() {
                 console.log('created')
             },
@@ -45,9 +57,13 @@
             },
             updated() {
                 console.log('updated')
-                console.log(this.n)
-                debugger
             },
+            beforeDestroy() {
+                console.log('beforeDestroy')
+            },
+            destroyed() {
+                console.log('destroyed')
+            }
         })
     </script>
 </html>
