@@ -11,3 +11,11 @@ new Vue({
   // 完成了： 将App组件放入容器中
   render: h => h(App),
 }).$mount('#app')
+
+// new Vue({
+//   el: '#app',
+//   // 完成了： 将App组件放入容器中
+//   // render: h => h(App),
+//   template:`<App></App>`,
+//   components: {App}
+// })
