@@ -2,8 +2,8 @@
     <ul class="todo-main">
 		<li>
       <label>
-        <input type="checkbox"/>
-        <span>xxxx</span>
+        <input type="checkbox" :checked="todo.done"/>
+        <span>{{todo.title}}</span>
       </label>
       <button class="btn btn-danger" style="display=:none">删除</button>
     </li>
@@ -13,7 +13,12 @@
 
 <script>
 export default {
-    name: 'MyItem'
+    name: 'MyItem',
+    // 声明接收 todo 对象
+    props:['todo'],
+    mounted(){
+      console.log(this.todo)
+    }
 }
 </script>
 

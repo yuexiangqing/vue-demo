@@ -1,10 +1,13 @@
 <template>
-  <div>
-    <MyHeader></MyHeader>
-    <MyList></MyList>
-    <MyFooter></MyFooter>
-    
-  </div>
+ <div id="root">
+		<div class="todo-container">
+			<div class="todo-wrap">
+        <MyHeader></MyHeader>
+        <MyList></MyList>
+        <MyFooter></MyFooter>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script>
