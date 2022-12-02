@@ -9,15 +9,7 @@ import MyItem from './MyItem'
 export default {
     name: 'MyList',
     components:{MyItem},
-    data(){
-      return{
-        todos:[
-          {id:'001',title:'抽烟',done:true},
-          {id:'002',title:'喝酒',done:false},
-          {id:'003',title:'开车',done:true}
-        ]
-      }
-    }
+    props:['todos']
 }
 </script>
 
