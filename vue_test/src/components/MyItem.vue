@@ -2,7 +2,10 @@
     <ul class="todo-main">
 		<li>
       <label>
-        <input type="checkbox" :checked="todo.done"/>
+        <!-- <input type="checkbox" :checked="todo.done" @click="handleCheck(todo.id)"/> -->
+        <input type="checkbox" :checked="todo.done" @change="handleCheck(todo.id)"/>
+        <!-- 如下代码也能实现功能，但是不太推荐，因为有点违反原则，因为修改了props  -->
+        <!-- <input type="checkbox" v-model="todo.done"/> -->
         <span>{{todo.title}}</span>
       </label>
       <button class="btn btn-danger" style="display=:none">删除</button>
@@ -15,9 +18,12 @@
 export default {
     name: 'MyItem',
     // 声明接收 todo 对象
-    props:['todo'],
-    mounted(){
-      console.log(this.todo)
+    props:['todo','checkTodo'],
+    methods:{
+      handleCheck (id){
+        // 通知App 组件将对应的 todo 对象的 done 值取反
+        this.checkTodo(id)
+      }
     }
 }
 </script>
