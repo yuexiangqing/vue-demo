@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="demo">
     <h2>学生姓名:{{name}}</h2>
     <h2>学生性别:{{sex}}</h2>
   </div>
@@ -18,5 +18,7 @@ export default {
 </script>
 
 <style>
-
+.demo {
+  background-color: orange;
+}
 </style>
