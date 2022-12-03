@@ -1,0 +1,26 @@
+<template>
+  <div class="student">
+    <h2>学生姓名:{{name}}</h2>
+    <h2>学生性别:{{sex}}</h2>
+  </div>
+</template>
+
+<script>
+export default {
+    name: 'StudentIndex',
+    data(){
+        return{
+            name: '张三',
+            sex: '男',
+        }
+    }
+
+    }
+</script>
+
+<style>
+.student {
+  background-color: pink;
+  margin-top: 30px;
+}
+</style>
