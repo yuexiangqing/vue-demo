@@ -14,6 +14,16 @@
               name: '尚硅谷',
               address: '北京'
           }
+      },
+      mounted(){
+        // console.log('School', this.$on)
+        this.$bus.$on('hello',(data)=>{
+          console.log('我是school组件,收到了数据',data);
+        })
+      },
+      // 要记得解绑全局总线
+      beforeDestroy(){
+        this.$bus.$off('hello')
       }
     }
   </script>
