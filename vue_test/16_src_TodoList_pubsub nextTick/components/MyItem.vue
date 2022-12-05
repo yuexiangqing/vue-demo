@@ -4,9 +4,16 @@
 			<input type="checkbox" :checked="todo.done" @change="handleCheck(todo.id)"/>
 			<!-- 如下代码也能实现功能，但是不太推荐，因为有点违反原则，因为修改了props -->
 			<!-- <input type="checkbox" v-model="todo.done"/> -->
-			<span>{{todo.title}}</span>
+			<span v-show="!todo.isEdit">{{todo.title}}</span>
+			<input 
+			v-show="todo.isEdit" 
+			type="text" 
+			:value="todo.title" 
+			@blur="handlerBlur(todo,$event)"
+			ref="inputTitle">
 		</label>
 		<button class="btn btn-danger" @click="handleDelete(todo.id)">删除</button>
+		<button v-show="!todo.isEdit" class="btn btn-edit" @click="handleEdit(todo)">编辑</button>
 	</li>
 </template>
 
@@ -31,6 +38,30 @@
 					// this.$bus.$emit('deleteTodo',id)
 					pubsub.publish('deleteTodo',id)
 				}
+			},
+			// 编辑
+			handleEdit(todo){
+				// eslint-disable-next-line no-prototype-builtins
+				if(todo.hasOwnProperty('isEdit')){
+					todo.isEdit = true
+				} else {
+					// console.log('todo身上没有isEdit')
+					this.$set(todo,'isEdit',true)
+				}
+				// 编辑的时候，自动获取焦点，因为 input 还没有渲染到页面，所以可以用一个延时器来设置获取焦点
+				// setTimeout(() => {
+				// 	this.$refs.inputTitle.focus()
+				// }, 200)
+				// 也可以用 nextTick ，可以指定一个回调，它会在 DOM 更新完毕之后再执行
+				this.$nextTick(function(){
+					this.$refs.inputTitle.focus()
+				})
+			},
+			// 失去焦点回调（真正执行修改逻辑）
+			handlerBlur(todo,e){
+				todo.isEdit = false
+				if(!e.target.value.trim()) return alert('输入不能为空')
+				this.$bus.$emit('updateTodo',todo.id,e.target.value)
 			}
 		},
 	}

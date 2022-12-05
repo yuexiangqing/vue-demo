@@ -36,6 +36,12 @@
 					if(todo.id === id) todo.done = !todo.done
 				})
 			},
+			// 更新一个todo
+			updateTodo(id,title){
+				this.todos.forEach((todo)=>{
+					if(todo.id === id) todo.title = title
+				})
+			},
 			//删除一个todo
 			// 通过消息发布与订阅，需要两个参数
 			deleteTodo(_,id){
@@ -65,11 +71,13 @@
 		mounted(){
 			this.$bus.$on('checkTodo',this.checkTodo)
 			// this.$bus.$on('deleteTodo',this.deleteTodo)
+			this.$bus.$on('updateTodo',this.updateTodo)
 			this.pubId = pubsub.subscribe('deleteTodo',this.deleteTodo)
 		},
 		beforeDestroy(){
 			this.$bus.$off('checkTodo')
 			// this.$bus.$off('deleteTodo')
+			this.$bus.$off('updateTodo')
 			pubsub.unsubscribe('this.pubId')
 		}
 	}
@@ -96,6 +104,12 @@
 		color: #fff;
 		background-color: #da4f49;
 		border: 1px solid #bd362f;
+	}
+	.btn-edit {
+		color: #fff;
+		background-color: #219bab;
+		border: 1px solid skyblue;
+		margin-right: 5px;
 	}
 	.btn-danger:hover {
 		color: #fff;
