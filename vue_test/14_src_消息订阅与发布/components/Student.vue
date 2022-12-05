@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import pubsub from 'pubsub-js'
 export default {
     name: 'StudentIndex',
     data(){
@@ -17,6 +18,8 @@ export default {
     },
     mounted(){
         // console.log('Student', this.x)
+        // 参数：第一个是消息名，第二个事要传入的数据
+        pubsub.publish('hello',666)
       },
       methods:{
         sendStudentName(){
