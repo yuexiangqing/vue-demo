@@ -7,6 +7,14 @@ import Vuex from "vuex"
 Vue.use(Vuex)
 // 准备 actions ———— 用于响应组件中的动作
 const actions = {
+    // 第一个参数是context上下文： commit，第二个参数是传入的值 
+    // jia(context,value){
+    //     // console.log('actions中的 jia 被调用了')
+    //     context.commit('JIA',value)
+    // },
+    // jian(context,value){
+    //     context.commit('JIAN',value)
+    // },
     jiaOdd(context,value){
         if(context.state.sum %2){
          context.commit('JIA',value)
