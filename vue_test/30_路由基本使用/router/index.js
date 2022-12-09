@@ -11,7 +11,7 @@ routes:[
         component:About
     },
     {
-        path:'./home',
+        path:'/home',
         component:Home
     }
 ]
